@@ -35,7 +35,8 @@ class Corpus(object):
                 for word in words:
                     self.dictionary.add_word(word)
 
-        # Tokenize file content
+        # Tokenize file content 
+        #rx: should use generator for larger dataset?
         with open(path, 'r') as f:
             ids = torch.LongTensor(tokens)
             token = 0

@@ -86,11 +86,16 @@ train_data = batchify(corpus.train, args.batch_size)
 val_data = batchify(corpus.valid, eval_batch_size)
 test_data = batchify(corpus.test, eval_batch_size)
 
+print("train corpus shape {}".format(corpus.train.size()))
+print("train data shape {}".format(train_data.size()))
+
+
 ###############################################################################
 # Build the model
 ###############################################################################
 
 ntokens = len(corpus.dictionary)
+print('number of unqiue tokens: {}'.format(ntokens))
 model = model.RNNModel(args.model, ntokens, args.emsize, args.nhid, args.nlayers, args.dropout, args.tied)
 if args.cuda:
     model.cuda()
@@ -143,7 +148,7 @@ def evaluate(data_source):
 
 def train():
     # Turn on training mode which enables dropout.
-    model.train()
+    model.train() # set the model in training mode
     total_loss = 0
     start_time = time.time()
     ntokens = len(corpus.dictionary)
